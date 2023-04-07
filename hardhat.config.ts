@@ -6,6 +6,8 @@ import "hardhat-deploy";
 import "./tasks";
 import "./tasks/functionSignature";
 import "./tasks/storageStructure";
+import "@nomiclabs/hardhat-ethers";
+import "@nomiclabs/hardhat-etherscan";
 
 import * as dotenv from "dotenv";
 dotenv.config();
@@ -58,6 +60,11 @@ const config: HardhatUserConfig = {
       ].filter(Boolean)
     },
     // "https://api-testnet.bscscan.com/"
+  },
+  etherscan: {
+    // Your API key for Etherscan
+    // Obtain one at https://bscscan.com/
+    apiKey: process.env.bscscanApiKey 
   },
   paths: {
     sources: "./contracts",
