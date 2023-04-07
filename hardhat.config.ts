@@ -32,6 +32,11 @@ const config: HardhatUserConfig = {
     hardhat: {},
     localhost: {
       url: "http://localhost:8545",
+      accounts : [
+        process.env.ACCOUNT1_PRIVATE_KEY as string,
+        process.env.ACCOUNT2_PRIVATE_KEY as string,
+        process.env.ACCOUNT3_PRIVATE_KEY as string
+      ].filter(Boolean)
     },
     goerli: {
       url: "https://goerli.infura.io/v3/" + process.env.INFURA_KEY,
@@ -42,6 +47,16 @@ const config: HardhatUserConfig = {
       //  count: 20,
       //}
     },
+    bsctest: {
+      url: "https://data-seed-prebsc-1-s1.binance.org:8545",
+      accounts:
+        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      // {
+      //  mnemonic: process.env.MNEMONIC,
+      //  count: 20,
+      //}
+    },
+    // "https://api-testnet.bscscan.com/"
   },
   paths: {
     sources: "./contracts",

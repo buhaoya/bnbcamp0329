@@ -5,13 +5,15 @@ import { readAddressList, storeAddressList } from "../scripts/helper";
 const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   const { deployments, getNamedAccounts, network } = hre;
   const { deploy } = deployments;
-  const { deployer } = await getNamedAccounts();
+  // const { deployer } = await getNamedAccounts();
+  const [deployer] = await hre.ethers.getSigners();
+  const deployerAddress = await deployer.getAddress();
 
   const addressList = readAddressList();
 
   const storageStructure = await deploy("StorageStructure", {
     contract: "StorageStructure",
-    from: deployer,
+    from: deployerAddress,
     args: [],
     log: true,
   });

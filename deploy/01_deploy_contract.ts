@@ -5,8 +5,11 @@ import { readAddressList, storeAddressList } from "../scripts/helper";
 const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   const { deployments, getNamedAccounts, network } = hre;
   const { deploy } = deployments;
-  const { deployer } = await getNamedAccounts();
-  console.log("Deploying My Contract with account:", deployer);
+  // const { deployer } = await getNamedAccounts();
+  const [deployer] = await hre.ethers.getSigners();
+  const deployerAddress = await deployer.getAddress();
+  // console.log("Deploying My Contract with account:", deployer);
+  console.log("Deploying My Contract with accountAddress:", deployerAddress);
 
   const addressList = readAddressList();
 
@@ -26,7 +29,7 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
 
   const myContract = await deploy("StandardImpl", {
     contract: "StandardImpl",
-    from: deployer,
+    from: deployerAddress,
     proxy: proxyOptions,
     args: [],
     log: true,
