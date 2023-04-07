@@ -49,12 +49,13 @@ const config: HardhatUserConfig = {
     },
     bsctest: {
       url: "https://data-seed-prebsc-1-s1.binance.org:8545",
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
-      // {
-      //  mnemonic: process.env.MNEMONIC,
-      //  count: 20,
-      //}
+      chainId: 97,
+      gasPrice: 20000000000,
+      accounts : [
+        process.env.ACCOUNT1_PRIVATE_KEY as string,
+        process.env.ACCOUNT2_PRIVATE_KEY as string,
+        process.env.ACCOUNT3_PRIVATE_KEY as string
+      ].filter(Boolean)
     },
     // "https://api-testnet.bscscan.com/"
   },

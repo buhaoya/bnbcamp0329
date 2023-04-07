@@ -12,6 +12,9 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   console.log("Deploying My Contract with accountAddress:", deployerAddress);
 
   const addressList = readAddressList();
+  if(!addressList[network.name]){
+    addressList[network.name] = {}
+  }
 
   const proxyOptions: ProxyOptions = {
     proxyContract: "TransparentUpgradeableProxy",

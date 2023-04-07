@@ -10,6 +10,9 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   const deployerAddress = await deployer.getAddress();
 
   const addressList = readAddressList();
+  if(!addressList[network.name]){
+    addressList[network.name] = {}
+  }
 
   const storageStructure = await deploy("StorageStructure", {
     contract: "StorageStructure",

@@ -36,6 +36,9 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   }
 
   const addressList = readAddressList();
+  if(!addressList[network.name]){
+    addressList[network.name] = {}
+  }
 
   const proxyAdmin = await deploy("ProxyAdmin", {
     contract: "ProxyAdmin",
